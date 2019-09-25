@@ -1,84 +1,41 @@
-// create empty array and name it 'entries'
-// create a variable called 'total' and set it to 0
-// create a variable called 'temp' and assign it an empty string
+// create empty array and name it 'entries'. This holds the values that will be showen on the screen.
 
-//Each comment relates to code below it!
+// create a variable called 'total' and set it to 0. Used when AC is pushed.
 
-//when the element with the ID of 'button' is clicked, call an anonymous function that creates a  variable called 'val' and asigns it the value of $'button'.text()
-$("button").on("click", function() {
-  var val = $(this).text();
+// create a variable called 'temp' and assign it an empty string. This will hold the values of the buttons that have been pressed, without showing them on screen(entries does this).
 
-  //use multiple conditional statements to create the below:
+//when the element with the ID of 'button' is clicked, call an anonymous function that creates a  variable called 'val' and asigns it the text value of the id/button that was pressed. Use this function for all buttons on calculator, therefore use if/else or switch statement. AKA take the text value of whatever button is pushed and assign it to variable val.
 
-  //if, using the isNaN() function, whether 'val' is an illegal number or not. Or, whether 'val' is strictly equal to a full stop '.'. The block code should equate the variable 'temp' to equal 'temp' plus 'val'.  Block code should also set the value attribute for the id'answer' using substring method.
-  // Shortened version: If value is a number or decimal, add the value to temp variable and reset the answer id/screen to be the value of temp, using substring method.
-  if (!isNaN(val) || val === ".") {
-    temp += val;
-    $("#answer").val(temp.substring(0, 10));
-    //if val variable is strictly equal to AC, entries should equal an empty array, temp should eual an empty string and total should equal 0.  $'#answer (the screen) should equal an empty string using the val method.
-    //  Short version: Got some symbol other than equals, add temp to our entries then add our current symbol and clear temp.
-  } else if (val === "AC") {
-    entries = [];
-    temp = "";
-    total = 0;
-    $("#answer").val("");
-    // if val is equal to CE then clear temp using an empty string and $'#answer (the screen) should equal an empty string using the val method. AKA clear last input.
-  } else if (val === "CE") {
-    temp = "";
-    $("#answer").val("");
+//if, val is a number (or not a NaN) or val is equal to a full stop '.'. Variable temp should have val added to it, then set the ID of the calculator screen to be the value of temp, using substring method.
 
-    // Change multiply symbol to work with eval ==  if val is equal to x(multiply) push temp to entries. Push * to entries and set temp to an empty string.
-  } else if (val === "x") {
-    entries.push(temp);
-    entries.push("*");
-    temp = "";
+//if the variable val is equal to AC (the AC button has been pushed) entries should equal an empty array, temp should equal an empty string and total should equal 0. The screen) should equal an empty string using the val method.
 
-    // Change divide symbol to work with eval ==  if val is equal to divide symbol push temp to entries. Push / to entries and set temp to an empty string.
-  } else if (val === "÷") {
-    entries.push(temp);
-    entries.push("/");
-    temp = "";
+// if val is equal to CE then clear temp using an empty string and the screen should equal an empty string using the val method. AKA clear last input.
 
-    // Got the equals sign, perform calculation == if val is equal to = then push temp to entries.
-  } else if (val === "=") {
-    entries.push(temp);
+// if val is equal to x(multiply) push temp to entries. Push * to entries and set temp to an empty string. (hange multiply symbol to work with eval)
 
-    // create a variable called nt which is equal to the first array index in 'entries'. Use the Number() constructor to work with the numerical values in entries.
-    // loop through the entries array.  Create variable nextNum that is equal to entries array item +1.
-    var nt = Number(entries[0]);
-    for (var i = 1; i < entries.length; i++) {
-      var nextNum = Number(entries[i + 1]);
-      var symbol = entries[i];
-      // if symbol is equal to + then nt is equal to nt + nextNum
-      if (symbol === "+") {
-        nt += nextNum;
-        // if symbol is equal to - then nt is equal to nt - nextNum
-      } else if (symbol === "-") {
-        nt -= nextNum;
-        // if symbol is equal to * then nt is equal to nt * nextNum
-      } else if (symbol === "*") {
-        nt *= nextNum;
-        // if symbol is equal to / then nt is equal to nt / nextNum
-      } else if (symbol === "/") {
-        nt /= nextNum;
-      }
-      // increment by one/check the next entry.
-      i++;
-    }
+//if val is equal to divide symbol push temp to entries. Push / to entries and set temp to an empty string.(Change divide symbol to work with eval)
 
-    // Swap the '-' symbol (minus) so text input handles it correctly == if nt is less than 0, then nt is equal to nt value + '-'. Use the Math.abs() function to do this.  (Math.abs(nt) + "-";) Math.abs() function returns the absolute value of a number.
-    if (nt < 0) {
-      nt = Math.abs(nt) + "-";
-    }
-    // #answer id val(nt), entries is an empty array and temp is an empty string
-    $("#answer").val(nt);
-    entries = [];
-    temp = "";
+// if val is equal to = then push temp to entries.(if equals signed is push, perform the calculation)
 
-    // else, push temp to entries and push val to entries and clear temp back to an empty string.
-  } else {
-    entries.push(temp);
-    entries.push(val);
-    temp = "";
-  }
-});
+// create a variable to represent the numbers pushed, which is equal to the number that is the first index in entries.
+// loop through the entries array.  Create variable nextNum that is equal to entries array item +1. This takes the next number (second one you pressed) and saves it.
+
+// create a variable to represent symbols. The value should be entries array item (var i from the loop)
+
+//if symbol pushed is equal to +, then add nextNum to the pushed numbers variable.
+
+// if symbol is equal to - then minus nextNum from the pushed numbers variable.
+
+// if symbol is equal to * then add * nextNum with the pushed numbers variable.
+
+// if symbol is equal to / then add / nextNum with the pushed numbers variable.
+
+// then increment by one/check the next entry.
+
+// Swap the '-' symbol (minus) so text input handles it correctly, so it's recognised as minus/negative number and not dash. AKA if pushed number variable is less than 0, then that variable is equal to the variable value + '-'. Use the Math.abs() function to do this.  (Math.abs(variable name) + "-";) Math.abs() function returns the absolute value of a number. The value of the pushed number variable should be pushed/placed to the screen, using ID. entries is set to an empty array and temp is an empty string
+
+// else, push temp to entries and push val to entries and clear temp back to an empty string.
+
+//////////
+//functions that need to be covered off when building a calculator: AC button, CE button, Decimal and Number buttons. Evaluation of numbers.Update Display. Event listeners for clicks - both to update screen and perform operations.
