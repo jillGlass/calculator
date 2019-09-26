@@ -13,9 +13,15 @@ var CE = document.getElementById("clear");
 var AC = document.getElementById("on");
 var allNumbers = document.getElementsByClassName("number");
 var operators = document.getElementsByClassName("operator");
+var screen = document.getElementById("display");
+var multiply = document.getElementById("multiply");
+var divide = document.getElementById("divide");
+var minus = document.getElementById("minus");
+var plus = document.getElementById("plus");
+var equals = document.getElementById("equals");
 
 // create empty array. This holds the values that will be showen on the screen.
-var numHolder = [];
+var enteredNumbers = [];
 // create a variable  and set it to 0. Used when AC is pushed.
 var total = 0;
 // create a variable and assign it an empty string. This will hold the values of the buttons that have been pressed, without showing them on screen(entries does this).
@@ -33,32 +39,38 @@ for (var i = 0; i < numKeys - 1; i++) {
   });
 
   //if, val is a number (or not a NaN) or val is equal to a full stop '.'. Variable temp should have val added to it, then set the ID of the calculator screen to be the value of temp.
-
-  //if the variable val is equal to AC (the AC button has been pushed) entries should equal an empty array, temp should equal an empty string and total should equal 0. The screen) should equal an empty string using the val method.
-
-  // if val is equal to CE then clear temp using an empty string and the screen should equal an empty string using the val method. AKA clear last input.
-  if (vals === CE) {
-    var tempNumbers = "";
-    document.getElementById("answer").value = "";
+  if (allNumbers || ".") {
+    var tempNumbers = tempNumbers + keyPress;
+    var tempNumbers = document.getElementById("display");
   }
-}
-// if val is equal to x(multiply) push temp to entries. Push * to entries and set temp to an empty string. (change multiply symbol to work with eval)
-/*
-  if (vals == "x") {
+  //if the variable val is equal to AC (the AC button has been pushed) entries should equal an empty array, temp should equal an empty string and total should equal 0. The screen) should equal an empty string using the val method.
+  else if (keyPress[i] == AC) {
+    var tempNumbers = "";
+    var numHolder = [];
+    var total = 0;
+  }
+  // if val is equal to CE then clear temp using an empty string and the screen should equal an empty string using the val method. AKA clear last input.
+  else if (keyPress[i] == CE) {
+    var tempNumbers = "";
+  }
+
+  // if val is equal to x(multiply) push temp to entries. Push * to entries and set temp to an empty string. (change multiply symbol to work with eval)
+
+  if (keyPress[i] == multiply) {
     enteredNumbers.push(tempNumbers);
     enteredNumbers.push("*");
     var tempNumbers = "";
   }
 
   //if val is equal to divide symbol push temp to entries. Push / to entries and set temp to an empty string.(Change divide symbol to work with eval)
-  if (vals == "/") {
+  if (keyPress[i] == divide) {
     enteredNumbers.push(tempNumbers);
     enteredNumbers.push("/");
     var tempNumbers = "";
   }
 
   // if val is equal to = then push temp to entries.(if equals signed is push, perform the calculation)
-  if (vals == "=") {
+  if (keyPress[i] == equals) {
     enteredNumbers.push(tempNumbers);
   }
 }
@@ -93,5 +105,3 @@ function findButtonbyTextContent(text) {
 
 //////////
 //functions that need to be covered off when building a calculator: AC button, CE button, Decimal and Number buttons. Evaluation of numbers.Update Display. Event listeners for clicks - both to update screen and perform operations.
-
-*/
