@@ -61,12 +61,13 @@ button {
   grid-area: display;
   text-align: right;
   font-size: 2rem;
-  background-color: rgba(116, 138, 105, 0.25);
   padding: 8px 8px 2px 8px;
   margin-bottom: 5px;
   color: black;
   font-weight: bold;
   border-radius: 5px;
+  height: 3rem;
+  background-color: rgba(54, 116, 24, 0.09);
 }
 
 #on {

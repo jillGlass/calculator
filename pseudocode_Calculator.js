@@ -22,28 +22,28 @@ var total = 0;
 var tempNumbers = "";
 
 //AKA when the a button is clicked, call  function that creates a variable and asigns it the text value of the id/button that was pressed. Use this function for all buttons on calculator, therefore use if/else or switch statement.//AKA take the text value of whatever button is pushed and assign it to a variable.
-var keyPress = document.querySelectorAll(".button"); //get all buttons
+var keyPress = document.querySelectorAll("button"); //get all buttons
+var numKeys = keyPress.length;
 
-for (var i = 0; i < keyPress.length; i++) {
-  //iterate through buttons
-  keyPress[i].addEventListener("click", () => {
-    keyPress[i].getAttribute("data-key");
-    document.getElementById("display").innerHTML = keyPress[i];
+for (var i = 0; i < numKeys - 1; i++) {
+  keyPress[i].addEventListener("click", function() {
+    document.getElementById("display").innerHTML = this.getAttribute(
+      "data-key"
+    );
   });
-}
 
-//if, val is a number (or not a NaN) or val is equal to a full stop '.'. Variable temp should have val added to it, then set the ID of the calculator screen to be the value of temp.
+  //if, val is a number (or not a NaN) or val is equal to a full stop '.'. Variable temp should have val added to it, then set the ID of the calculator screen to be the value of temp.
 
-//if the variable val is equal to AC (the AC button has been pushed) entries should equal an empty array, temp should equal an empty string and total should equal 0. The screen) should equal an empty string using the val method.
-
-/*
+  //if the variable val is equal to AC (the AC button has been pushed) entries should equal an empty array, temp should equal an empty string and total should equal 0. The screen) should equal an empty string using the val method.
 
   // if val is equal to CE then clear temp using an empty string and the screen should equal an empty string using the val method. AKA clear last input.
   if (vals === CE) {
     var tempNumbers = "";
     document.getElementById("answer").value = "";
   }
-  // if val is equal to x(multiply) push temp to entries. Push * to entries and set temp to an empty string. (change multiply symbol to work with eval)
+}
+// if val is equal to x(multiply) push temp to entries. Push * to entries and set temp to an empty string. (change multiply symbol to work with eval)
+/*
   if (vals == "x") {
     enteredNumbers.push(tempNumbers);
     enteredNumbers.push("*");
