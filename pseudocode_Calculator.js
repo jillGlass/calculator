@@ -20,11 +20,12 @@ var minus = document.getElementById("minus");
 var plus = document.getElementById("plus");
 var equals = document.getElementById("equals");
 
-// create empty array. This holds the values that will be showen on the screen.
+// create empty array. This holds the values that will be calculated.
 var evalStringArray = [];
-// create a variable  and set it to 0.
+// create a variable that is display number string
 var displayVal = 0;
-// create a variable and assign it an empty string. This will hold the values of the buttons that have been pressed, without showing them on screen
+
+// create a variable and assign it an empty string. This will hold the values of the buttons that have been pressed, showed on screen, then replaced with the next button press.
 var pendingVal = "";
 
 // when the a button is clicked, call  function that creates a variable and asigns it the text value of the id/button that was pressed. Use this function for all buttons on calculator, therefore use if/else or switch statement.//AKA take the text value of whatever button is pushed and assign it to a variable.
@@ -41,29 +42,21 @@ function updateDisplayVal() {
     displayVal = "";
   }
   displayVal += buttonText;
-  displayValElement.innerText = displayVal;
+  displayValElement.innerText = displayVal.substring(0, 9);
 }
 for (var i = 0; i < allNumbers.length; i++) {
   allNumbers[i].addEventListener("click", updateDisplayVal, false);
-}
-/*   
 
-//if, val is a number (or not a NaN) or val is equal to a full stop '.'. Variable temp should have val added to it, then set the ID of the calculator screen to be the value of temp.
-if (!isNaN(keyPress[i]) || keyPress[i] == ".") {
-    pendingVal = pendingVal + keyPress[i];
-    document.getElementById("display") = pendingVal;
+  //if, val is a number (or not a NaN) or pressed button is equal to a full stop '.'. pendingVal should have pendingval added to it, then set the calculator screen to be the value of pendingVal but only 10 numbers long.
+  if (!isNaN(allNumbers[i]) || allNumbers[i] == ".") {
+    pendingVal += allNumbers[i];
+    displayValElement.innerHTML = pendingVal;
   }
-
-  
-
-
-*/
-
+}
 for (var i = 0; i < operators.length; i++) {
   operators[i].addEventListener("click", updateDisplayVal, false);
-}
-/*
-  switch (operatorPress) {
+
+  switch (operators[i]) {
     case "+":
       pendingVal = displayVal;
       displayVal = "0"; // will display as 0, need to change to stay as number last pushed
@@ -105,33 +98,34 @@ for (var i = 0; i < operators.length; i++) {
       evalStringArray = [];
       break;
 
-    case "on":
+    case "AC":
       displayVal = "";
       displayValElement.innerText = displayVal;
       break;
-
-// if val is equal to CE then clear temp using an empty string and the screen should equal an empty string using the val method. AKA clear last input.
-    case "clear":
-      displayVal = "";
-      
-       
-      break;
   }
 }
-  //if the variable val is equal to AC (the AC button has been pushed) entries should equal an empty array, temp should equal an empty string and total should equal 0. The screen) should equal an empty string using the val method.
-  else if (keyPress[i] == AC) {
-    pendingVal = "";
-    evalStringArray = [];
-    total = 0;
-  }
-  // if val is equal to CE then clear temp using an empty string and the screen should equal an empty string using the val method. AKA clear last input.
-  else if (keyPress[i] == CE) {
-    var pendingVal = "";
-  }
-}
-
-  
 /*
+//loop through operators and get the button push to show on screen. eval?
+for (var i = 0; i < operators.length; i++) {
+  operators[i].addEventListener("click", updateDisplayVal, false);
+
+  // if val is equal to CE then clear temp using an empty string and the screen should equal an empty string using the val method. AKA clear last input.
+  if (operators[i] == CE) {
+    var pendingVal = "";
+    displayValElement.innerHTML = pendingVal;
+  } //else if (operators[i] == "+") {
+  //pendingVal = displayVal; // move the displayed val onto pending to make way for the symbol
+  //updateDisplayVal(); // displayVal will equal the symbol pushed and screen/display will show symbol
+  // evalStringArray.push(pendingVal);
+  // evalStringArray.push("+");
+}
+
+ //if the variable val is equal to AC (the AC button has been pushed) entries should equal an empty array, temp should equal an empty string and total should equal 0. The screen) should equal an empty string using the val method.
+/if (operators[i] == AC) {
+    displayVal = "";
+    displayValElement.innerText = displayVal;
+  }
+
  
 }
 // create a variable to represent the numbers pushed, which is equal to the number that is the first index in entries.
