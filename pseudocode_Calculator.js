@@ -9,8 +9,8 @@ var eightBtn = document.getElementById("eight");
 var nineBtn = document.getElementById("nine");
 var zeroBtn = document.getElementById("zero");
 var decimalBtn = document.getElementById("dot");
-var CE = document.getElementById("clear");
-var AC = document.getElementById("on");
+var clear = document.getElementById("clear");
+var on = document.getElementById("on");
 var allNumbers = document.getElementsByClassName("number");
 var operators = document.getElementsByClassName("operator");
 var displayValElement = document.getElementById("display");
@@ -28,9 +28,7 @@ var displayVal = 0;
 // create a variable and assign it an empty string. This will hold the values of the buttons that have been pressed, showed on screen, then replaced with the next button press.
 var pendingVal = "";
 
-// when the a button is clicked, call  function that creates a variable and asigns it the text value of the id/button that was pressed. Use this function for all buttons on calculator, therefore use if/else or switch statement.//AKA take the text value of whatever button is pushed and assign it to a variable.
-
-//when mumber button is pressed, iterate through all numbers to get pressed button, add a click event function to that button. function will update the screen with button pushed.
+// when the a button is clicked, call a function that creates a variable and asigns it the text value of the id/button that was pressed.
 
 function updateDisplayVal() {
   var buttonText = (document.getElementById(
@@ -42,21 +40,38 @@ function updateDisplayVal() {
     displayVal = "";
   }
   displayVal += buttonText;
+  pendingVal = displayVal;
+  evalStringArray.push(pendingVal);
   displayValElement.innerText = displayVal.substring(0, 9);
 }
+
+//  event listeners, once clicked they run through each number or operator until they get the number/operator that was clicked, then that value is displayed in the calculator.
 for (var i = 0; i < allNumbers.length; i++) {
   allNumbers[i].addEventListener("click", updateDisplayVal, false);
-
-  //if, val is a number (or not a NaN) or pressed button is equal to a full stop '.'. pendingVal should have pendingval added to it, then set the calculator screen to be the value of pendingVal but only 10 numbers long.
-  if (!isNaN(allNumbers[i]) || allNumbers[i] == ".") {
-    pendingVal += allNumbers[i];
-    displayValElement.innerHTML = pendingVal;
-  }
 }
 for (var i = 0; i < operators.length; i++) {
   operators[i].addEventListener("click", updateDisplayVal, false);
+}
 
-  switch (operators[i]) {
+//main clear button, clear out all pending values and set display back to 0
+on.onclick = () => {
+  pendingVal = "";
+  evalStringArray = [];
+  displayVal = 0;
+  displayValElement.innerHTML = displayVal;
+};
+
+// clear button, clear last button press
+clear.onclick = () => {
+  pendingVal = pendingVal.substring(0, pendingVal.length - 1);
+  displayValElement.innerHTML = pendingVal;
+};
+
+var performEvaluation = () => {
+  var operators = (document.getElementById(
+    "display"
+  ).innerHTML = this.getAttribute("data-key"));
+  switch (operators) {
     case "+":
       pendingVal = displayVal;
       displayVal = "0"; // will display as 0, need to change to stay as number last pushed
@@ -97,22 +112,14 @@ for (var i = 0; i < operators.length; i++) {
       evalStringArray.push(pendingVal); //add all the pending values onto the array
       evalStringArray = [];
       break;
-
-    case "AC":
-      displayVal = "";
-      displayValElement.innerText = displayVal;
-      break;
   }
-}
+};
+
 /*
 //loop through operators and get the button push to show on screen. eval?
 for (var i = 0; i < operators.length; i++) {
   operators[i].addEventListener("click", updateDisplayVal, false);
 
-  // if val is equal to CE then clear temp using an empty string and the screen should equal an empty string using the val method. AKA clear last input.
-  if (operators[i] == CE) {
-    var pendingVal = "";
-    displayValElement.innerHTML = pendingVal;
   } //else if (operators[i] == "+") {
   //pendingVal = displayVal; // move the displayed val onto pending to make way for the symbol
   //updateDisplayVal(); // displayVal will equal the symbol pushed and screen/display will show symbol
@@ -120,22 +127,6 @@ for (var i = 0; i < operators.length; i++) {
   // evalStringArray.push("+");
 }
 
- //if the variable val is equal to AC (the AC button has been pushed) entries should equal an empty array, temp should equal an empty string and total should equal 0. The screen) should equal an empty string using the val method.
-/if (operators[i] == AC) {
-    displayVal = "";
-    displayValElement.innerText = displayVal;
-  }
-
- 
-}
-// create a variable to represent the numbers pushed, which is equal to the number that is the first index in entries.
-
-var numPress = enteredNumbers[0];
-
-// loop through the entries array.  Create variable nextNum that is equal to enteredNumbers array item +1. This takes the next number (second one you pressed) and saves it.
-
-for (var i = 0; i < enteredNumbers - 1; i++) {
-  var nextNumber = enteredNumbers[i] + 1;
 
   // create a variable to represent symbols. The value should be entries array item (var i from the loop)
   var symbolPress = enteredNumbers[i];
