@@ -42,11 +42,16 @@ button {
   border-radius: 5px;
   background-color: #050505;
   box-shadow: 1px 3px rgb(44, 43, 43);
+  border: black solid 0.5px;
+}
+label {
+  border: rgb(155, 152, 152) solid 2px;
+  border: inset, rgb(68, 67, 67);
+  white-space: nowrap;
 }
 
 label,
 button {
-  border: black solid 0.5px;
   color: rgb(233, 224, 224);
   font-size: 16px;
 }
