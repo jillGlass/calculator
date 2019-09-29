@@ -22,13 +22,15 @@ var equals = document.getElementById("equals");
 
 // create empty array. This holds the values that will be calculated.
 var evalStringArray = [];
-// create a variable that is display number string
+// create a variable that is display number string.
 var displayVal = 0;
-
-// create a variable and assign it an empty string. This will hold the values of the buttons that have been pressed, showed on screen, then replaced with the next button press.
+// create a variable and assign it an empty string. This will hold the values of the buttons that have been pressed, showen on screen, then replaced with the next button press.
 var pendingVal = "";
 
 // when the a button is clicked, call a function that creates a variable and asigns it the text value of the id/button that was pressed.
+for (var i = 0; i < allNumbers.length; i++) {
+  allNumbers[i].addEventListener("click", updateDisplayVal, false);
+}
 
 function updateDisplayVal() {
   var buttonText = (document.getElementById(
@@ -53,14 +55,6 @@ function updateDisplayVal() {
   displayValElement.innerText = displayVal.substring(0, 9);
 }
 
-//  event listeners, once clicked they run through each number or operator until they get the number/operator that was clicked, then that value is displayed in the calculator.
-for (var i = 0; i < allNumbers.length; i++) {
-  allNumbers[i].addEventListener("click", updateDisplayVal, false);
-}
-for (var i = 0; i < operators.length; i++) {
-  operators[i].addEventListener("click", updateOpDisplayVal, false);
-}
-
 //main clear button, clear out all pending values and set display back to 0
 on.onclick = () => {
   pendingVal = "";
@@ -69,16 +63,20 @@ on.onclick = () => {
   displayValElement.innerHTML = displayVal;
 };
 
-// clear button, clear last button press
+// clear button, clear last button press. If all numbers cleared then a zero will show. - update to clear last whole input?
 clear.onclick = () => {
   displayVal = displayVal.substring(0, displayVal.length - 1);
   displayValElement.innerHTML = displayVal;
   if (displayVal === "") {
-    // this isn't working for some reason..console.log is saying it's ok
     displayVal = "0";
     displayValElement.innerHTML = displayVal;
   }
 };
+//  event listeners, once clicked they run through each number or operator until they get the number/operator that was clicked, then that value is displayed in the calculator.
+
+for (var i = 0; i < operators.length; i++) {
+  operators[i].addEventListener("click", updateOpDisplayVal, false);
+}
 
 function updateOpDisplayVal() {
   var buttonText = (document.getElementById(
