@@ -38,8 +38,15 @@ function updateDisplayVal() {
   //get rid of 0 before pressed number
   if (displayVal === 0) {
     displayVal = "";
-  } else if (displayVal === operators) {
-    displayVal = displayVal.substring(1);
+    //get rid of operator infront of numbers when entering numbers after pushing operator
+  } else if (displayVal === "+") {
+    displayVal = "";
+  } else if (displayVal === "-") {
+    displayVal = "";
+  } else if (displayVal === "/") {
+    displayVal = "";
+  } else if (displayVal === "x") {
+    displayVal = "";
   }
   displayVal += buttonText;
   pendingVal = displayVal;
