@@ -41,7 +41,6 @@ function updateDisplayVal() {
   }
   displayVal += buttonText;
   pendingVal = displayVal;
-  evalStringArray.push(pendingVal);
   displayValElement.innerText = displayVal.substring(0, 9);
 }
 
@@ -50,7 +49,7 @@ for (var i = 0; i < allNumbers.length; i++) {
   allNumbers[i].addEventListener("click", updateDisplayVal, false);
 }
 for (var i = 0; i < operators.length; i++) {
-  operators[i].addEventListener("click", updateDisplayVal, false);
+  operators[i].addEventListener("click", updateOpDisplayVal, false);
 }
 
 //main clear button, clear out all pending values and set display back to 0
@@ -63,10 +62,40 @@ on.onclick = () => {
 
 // clear button, clear last button press
 clear.onclick = () => {
-  pendingVal = pendingVal.substring(0, pendingVal.length - 1);
-  displayValElement.innerHTML = pendingVal;
+  displayVal = displayVal.substring(0, displayVal.length - 1);
+  displayValElement.innerHTML = displayVal;
 };
+if (displayVal === "") {
+  // this isn't working for some reason..console.log is saying it's ok
+  displayVal = "0";
+}
 
+function updateOpDisplayVal() {
+  var buttonText = (document.getElementById(
+    "display"
+  ).innerHTML = this.getAttribute("data-key"));
+
+  displayVal = buttonText; // button press opertor will be on show on screen display
+  pendingVal = displayVal; // display value will be moved to pending value
+  displayValElement.innerText = displayVal.substring(0, 1);
+}
+/*
+//loop through operators and get the button push to show on screen. eval?
+for (var i = 0; i < operators.length; i++) {
+  operators[i].addEventListener("click", updateDisplayVal, false);
+
+  } //else if (operators[i] == "+") {
+  //pendingVal = displayVal; // move the displayed val onto pending to make way for the symbol
+  //updateDisplayVal(); // displayVal will equal the symbol pushed and screen/display will show symbol
+  // evalStringArray.push(pendingVal);
+  // evalStringArray.push("+");
+}
+
+
+  
+// Swap the '-' symbol (minus) so text input handles it correctly, so it's recognised as minus/negative number and not dash. AKA if pushed number variable is less than 0, then that variable is equal to the variable value + '-'. Use the Math.abs() function to do this.  (Math.abs(variable name) + "-";) Math.abs() function returns the absolute value of a number. The value of the pushed number variable should be pushed/placed to the screen, using ID. entries is set to an empty array and temp is an empty string
+
+// else, push temp to entries and push val to entries and clear temp back to an empty string.
 var performEvaluation = () => {
   var operators = (document.getElementById(
     "display"
@@ -113,43 +142,4 @@ var performEvaluation = () => {
       evalStringArray = [];
       break;
   }
-};
-
-/*
-//loop through operators and get the button push to show on screen. eval?
-for (var i = 0; i < operators.length; i++) {
-  operators[i].addEventListener("click", updateDisplayVal, false);
-
-  } //else if (operators[i] == "+") {
-  //pendingVal = displayVal; // move the displayed val onto pending to make way for the symbol
-  //updateDisplayVal(); // displayVal will equal the symbol pushed and screen/display will show symbol
-  // evalStringArray.push(pendingVal);
-  // evalStringArray.push("+");
-}
-
-
-  // create a variable to represent symbols. The value should be entries array item (var i from the loop)
-  var symbolPress = enteredNumbers[i];
-  //if symbol pushed is equal to +, then add nextNum to the pushed numbers variable.
-  if (symbolPress == "+") {
-    numPress = numPress + nextNumber;
-  }
-  // if symbol is equal to - then minus nextNum from the pushed numbers variable.
-  else if (symbolPress == "-") {
-    numPress = numPress - nextNumber;
-  }
-  // if symbol is equal to * then add * nextNum with the pushed numbers variable.
-  else if (symbolPress == "*") {
-    numPress = numPress * nextNumber;
-  }
-  // if symbol is equal to / then add / nextNum with the pushed numbers variable.
-  else if (symbolPress == "/") {
-    numPress = numPress / nextNumber;
-  }
-  // then increment by one/check the next entry.
-  i++;
-}
-// Swap the '-' symbol (minus) so text input handles it correctly, so it's recognised as minus/negative number and not dash. AKA if pushed number variable is less than 0, then that variable is equal to the variable value + '-'. Use the Math.abs() function to do this.  (Math.abs(variable name) + "-";) Math.abs() function returns the absolute value of a number. The value of the pushed number variable should be pushed/placed to the screen, using ID. entries is set to an empty array and temp is an empty string
-
-// else, push temp to entries and push val to entries and clear temp back to an empty string.
-*/
+};*/
