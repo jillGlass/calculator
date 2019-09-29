@@ -1,13 +1,3 @@
-var oneBtn = document.getElementById("one");
-var twoBtn = document.getElementById("two");
-var threeBtn = document.getElementById("three");
-var fourBtn = document.getElementById("four");
-var fiveBtn = document.getElementById("five");
-var sixBtn = document.getElementById("six");
-var sevenBtn = document.getElementById("seven");
-var eightBtn = document.getElementById("eight");
-var nineBtn = document.getElementById("nine");
-var zeroBtn = document.getElementById("zero");
 var decimalBtn = document.getElementById("dot");
 var clear = document.getElementById("clear");
 var on = document.getElementById("on");
@@ -107,19 +97,20 @@ function updateOpDisplayVal() {
     displayValElement.innerText = displayVal;
     evalStringArray.push(pendingVal);
     evalStringArray.push("*"); // send the programming operator
-  } else if (buttonOpText == "÷") {
+  } else if (buttonOpText == "/") {
     pendingVal = displayVal;
     displayVal = buttonOpText;
     displayValElement.innerText = displayVal;
     evalStringArray.push(pendingVal);
     evalStringArray.push("/"); // send the programming operator
   } else if (buttonOpText == "=") {
-    //run the evaluation that takes place on the evalStringArray.
-    evalStringArray.push(displayVal);
-    var calculation = eval(evalStringArray.join("")); //eval() runs the math between the brackets. join() thens the array values together into a string. "" states a string with a space between each value.
+    evalStringArray.push(displayVal); //push the = to the array so the calculation can take place
+    var calculation = eval(evalStringArray.join("")); //eval() runs the math between the brackets. join() thens joins the array values together. "" states an array with no space between each value.
     displayVal = calculation;
     displayValElement.innerText = displayVal;
+    displayVal = displayVal;
     evalStringArray.push(pendingVal); //clear out the pendingVal
     evalStringArray = []; //clear out the array
   }
 }
+//numbers run off screen if too long, how to fix?
