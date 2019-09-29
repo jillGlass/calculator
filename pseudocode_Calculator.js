@@ -106,11 +106,18 @@ function updateOpDisplayVal() {
   } else if (buttonOpText == "=") {
     evalStringArray.push(displayVal); //push the = to the array so the calculation can take place
     var calculation = eval(evalStringArray.join("")); //eval() runs the math between the brackets. join() thens joins the array values together. "" states an array with no space between each value.
-    displayVal = calculation;
+    var rounded = calculation.toFixed(2);
+    displayVal = rounded.toString().substring(0, 9);
     displayValElement.innerText = displayVal;
     displayVal = displayVal;
     evalStringArray.push(pendingVal); //clear out the pendingVal
     evalStringArray = []; //clear out the array
   }
 }
+
 //numbers run off screen if too long, how to fix?
+//var calculation = eval(evalStringArray.join("")); //eval() runs the math between the brackets. join() thens joins the array values together. "" states an array with no space between each value.
+//var rounded = calculation.toFixed(2);
+//displayVal = rounded.toString().substring(0, 9);
+
+//.toFixed(2)
