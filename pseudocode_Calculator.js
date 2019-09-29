@@ -29,10 +29,10 @@ var pendingVal = "";
 
 // when the a button is clicked, call a function that creates a variable and asigns it the text value of the id/button that was pressed.
 for (var i = 0; i < allNumbers.length; i++) {
-  allNumbers[i].addEventListener("click", updateDisplayVal, false);
+  allNumbers[i].addEventListener("click", updateNumDisplayVal, false);
 }
 
-function updateDisplayVal() {
+function updateNumDisplayVal() {
   var buttonText = (document.getElementById(
     "display"
   ).innerHTML = this.getAttribute("data-key"));
@@ -51,10 +51,10 @@ function updateDisplayVal() {
     displayVal = "";
   }
   displayVal += buttonText;
-  pendingVal = displayVal;
+  pendingVal += displayVal;
   displayValElement.innerText = displayVal.substring(0, 9);
 }
-
+// decimal button can only be shown on display screen once.
 decimalBtn.onclick = () => {
   if (!displayVal.includes(".")) displayVal += ".";
   displayValElement.innerText = displayVal;
@@ -83,80 +83,43 @@ for (var i = 0; i < operators.length; i++) {
   operators[i].addEventListener("click", updateOpDisplayVal, false);
 }
 function updateOpDisplayVal() {
-  var buttonText = (document.getElementById(
+  var buttonOpText = (document.getElementById(
     "display"
   ).innerHTML = this.getAttribute("data-key"));
-
-  displayVal = buttonText; // button press opertor will be on show on screen display
-  pendingVal = displayVal; // display value will be moved to pending value
-  displayValElement.innerText = displayVal.substring(0, 1);
 
   //loop through operators and get the button push to show on screen. eval?
 
-  if (operators[i] == "+") {
-    pendingVal = displayVal; // move the displayed val onto pending to make way for the symbol
-    displayVal = operators[i]; // displayVal will equal the symbol pushed and screen/display will show symbol
+  if (buttonOpText == "+") {
+    pendingVal = displayVal; // move the displayed val onto pendingVal
+    displayVal = buttonOpText; // displayVal will equal the symbol pushed
+    displayValElement.innerText = displayVal; //screen/display will show symbol
+    evalStringArray.push(pendingVal); // push the pendingVal to the array for calculation
+    evalStringArray.push("+"); // push the operator to array for calculation
+  } else if (buttonOpText == "-") {
+    pendingVal = displayVal;
+    displayVal = buttonOpText;
+    displayValElement.innerText = displayVal;
     evalStringArray.push(pendingVal);
-    evalStringArray.push("+");
+    evalStringArray.push("-");
+  } else if (buttonOpText == "x") {
+    pendingVal = displayVal;
+    displayVal = buttonOpText;
+    displayValElement.innerText = displayVal;
+    evalStringArray.push(pendingVal);
+    evalStringArray.push("*"); // send the programming operator
+  } else if (buttonOpText == "÷") {
+    pendingVal = displayVal;
+    displayVal = buttonOpText;
+    displayValElement.innerText = displayVal;
+    evalStringArray.push(pendingVal);
+    evalStringArray.push("/"); // send the programming operator
+  } else if (buttonOpText == "=") {
+    //run the evaluation that takes place on the evalStringArray.
+    evalStringArray.push(displayVal);
+    var calculation = eval(evalStringArray.join("")); //eval() runs the math between the brackets. join() thens the array values together into a string. "" states a string with a space between each value.
+    displayVal = calculation;
+    displayValElement.innerText = displayVal;
+    evalStringArray.push(pendingVal); //clear out the pendingVal
+    evalStringArray = []; //clear out the array
   }
 }
-/*
-case "+":
-      pendingVal = displayVal;
-      displayVal = "0"; // will display as 0, need to change to stay as number last pushed
-      displayValElement.innerText = displayVal; //displayValElement is our "answer" class. this states that what should show in the answer space is the displayVal variable, declared previously as 0
-      evalStringArray.push(pendingVal); //push saved previous digits to the array
-      evalStringArray.push("+"); //push the + button once pushed on to the array to be saved
-      break;
-
-  
-// Swap the '-' symbol (minus) so text input handles it correctly, so it's recognised as minus/negative number and not dash. AKA if pushed number variable is less than 0, then that variable is equal to the variable value + '-'. Use the Math.abs() function to do this.  (Math.abs(variable name) + "-";) Math.abs() function returns the absolute value of a number. The value of the pushed number variable should be pushed/placed to the screen, using ID. entries is set to an empty array and temp is an empty string
-
-// else, push temp to entries and push val to entries and clear temp back to an empty string.
-var performEvaluation = () => {
-  var operators = (document.getElementById(
-    "display"
-  ).innerHTML = this.getAttribute("data-key"));
-  switch (operators) {
-    case "+":
-      pendingVal = displayVal;
-      displayVal = "0"; // will display as 0, need to change to stay as number last pushed
-      displayValElement.innerText = displayVal; //displayValElement is our "answer" class. this states that what should show in the answer space is the displayVal variable, declared previously as 0
-      evalStringArray.push(pendingVal); //push saved previous digits to the array
-      evalStringArray.push("+"); //push the + button once pushed on to the array to be saved
-      break;
-
-    case "-":
-      pendingVal = displayVal;
-      displayVal = "0";
-      displayValElement.innerText = displayVal;
-      evalStringArray.push(pendingVal);
-      evalStringArray.push("-");
-      break;
-
-    case "x":
-      pendingVal = displayVal;
-      displayVal = "0";
-      displayValElement.innerText = displayVal;
-      evalStringArray.push(pendingVal);
-      evalStringArray.push("*"); // use the js method of multiplication
-      break;
-
-    case "/":
-      pendingVal = displayVal;
-      displayVal = "0";
-      displayValElement.innerText = displayVal;
-      evalStringArray.push(pendingVal);
-      evalStringArray.push("/");
-      break;
-
-    case "=":
-      evalStringArray.push(displayVal); //get the array that will hold pending values and push the display value on to it
-      var evaluation = eval(evalStringArray.join("")); //eval() runs the math between the brackets. join() thens the array values together into a string. "" states a string with a space between each value.
-      displayVal = evaluation + ""; // evaluation variable will be displayed in the answer box
-      displayValElement.innerText = displayVal; //the answer box will be equal to the displayVal (the answer)
-      evalStringArray.push(pendingVal); //add all the pending values onto the array
-      evalStringArray = [];
-      break;
-  }
-};*/
