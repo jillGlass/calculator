@@ -38,6 +38,8 @@ function updateDisplayVal() {
   //get rid of 0 before pressed number
   if (displayVal === 0) {
     displayVal = "";
+  } else if (displayVal === operators) {
+    displayVal = displayVal.substring(1);
   }
   displayVal += buttonText;
   pendingVal = displayVal;
@@ -64,11 +66,12 @@ on.onclick = () => {
 clear.onclick = () => {
   displayVal = displayVal.substring(0, displayVal.length - 1);
   displayValElement.innerHTML = displayVal;
+  if (displayVal === "") {
+    // this isn't working for some reason..console.log is saying it's ok
+    displayVal = "0";
+    displayValElement.innerHTML = displayVal;
+  }
 };
-if (displayVal === "") {
-  // this isn't working for some reason..console.log is saying it's ok
-  displayVal = "0";
-}
 
 function updateOpDisplayVal() {
   var buttonText = (document.getElementById(
