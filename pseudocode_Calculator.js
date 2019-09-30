@@ -114,10 +114,10 @@ function updateOpDisplayVal() {
     var calculation = eval(evalStringArray.join(""));
     //var calculation = Math.round(calculation * 100) / 100;
 
-    displayVal = calculation.toString().substring(0, 9);
+    displayVal = calculation.toFixed(4).substring(0, 9);
     displayValElement.innerText = displayVal;
     if (displayVal.length > 8) {
-      displayValElement.innerText = "too big soz"; // otherwise numbers run off screen.
+      displayValElement.innerText = "ERROR"; // otherwise numbers run off screen.
     }
     displayVal = displayVal;
     evalStringArray.push(pendingVal); //clear out the pendingVal
