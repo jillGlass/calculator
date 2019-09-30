@@ -40,10 +40,15 @@ function updateNumDisplayVal() {
   } else if (displayVal === "x") {
     displayVal = "";
   }
+  while (displayVal.charAt(0) === "0" && displayVal.charAt(1) === "0") {
+    displayVal = displayVal.slice(1);
+  }
+
   displayVal += buttonText;
   pendingVal += displayVal;
   displayValElement.innerText = displayVal.substring(0, 9);
 }
+
 // decimal button can only be shown on display screen once.
 decimalBtn.onclick = () => {
   if (!displayVal.includes(".")) displayVal += ".";
@@ -78,7 +83,7 @@ function updateOpDisplayVal() {
     "display"
   ).innerHTML = this.getAttribute("data-key"));
 
-  //loop through operators and get the button push to show on screen. eval?
+  //loop through operators and get the button push to show on screen.
 
   if (buttonOpText == "+") {
     pendingVal = displayVal; // move the displayed val onto pendingVal
@@ -107,20 +112,15 @@ function updateOpDisplayVal() {
   } else if (buttonOpText == "=") {
     evalStringArray.push(displayVal); //push the = to the array so the calculation can take place
     var calculation = eval(evalStringArray.join(""));
+    //var calculation = Math.round(calculation * 100) / 100;
+
     displayVal = calculation.toString().substring(0, 9);
     displayValElement.innerText = displayVal;
     if (displayVal.length > 8) {
-      displayValElement.innerText = "too big soz";
+      displayValElement.innerText = "ERROR"; // otherwise numbers run off screen.
     }
     displayVal = displayVal;
     evalStringArray.push(pendingVal); //clear out the pendingVal
     evalStringArray = []; //clear out the array
   }
 }
-
-//numbers run off screen if too long, how to fix?
-//var calculation = eval(evalStringArray.join("")); //eval() runs the math between the brackets. join() thens joins the array values together. "" states an array with no space between each value.
-//var rounded = calculation.toFixed(2);
-//displayVal = rounded.toString().substring(0, 9);
-
-//.toFixed(2)
