@@ -72,6 +72,7 @@ clear.onclick = () => {
 for (var i = 0; i < operators.length; i++) {
   operators[i].addEventListener("click", updateOpDisplayVal, false);
 }
+
 function updateOpDisplayVal() {
   var buttonOpText = (document.getElementById(
     "display"
@@ -105,10 +106,12 @@ function updateOpDisplayVal() {
     evalStringArray.push("/"); // send the programming operator
   } else if (buttonOpText == "=") {
     evalStringArray.push(displayVal); //push the = to the array so the calculation can take place
-    var calculation = eval(evalStringArray.join("")); //eval() runs the math between the brackets. join() thens joins the array values together. "" states an array with no space between each value.
-    var rounded = calculation.toFixed(2);
-    displayVal = rounded.toString().substring(0, 9);
+    var calculation = eval(evalStringArray.join(""));
+    displayVal = calculation.toString().substring(0, 9);
     displayValElement.innerText = displayVal;
+    if (displayVal.length > 8) {
+      displayValElement.innerText = "too big soz";
+    }
     displayVal = displayVal;
     evalStringArray.push(pendingVal); //clear out the pendingVal
     evalStringArray = []; //clear out the array
