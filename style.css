@@ -1,0 +1,163 @@
+:focus {
+  outline: none;
+}
+::-moz-focus-inner {
+  border: 0;
+}
+body {
+  background-color: #eee2dc;
+}
+
+.calculatorWrapper {
+  display: grid;
+  background-color: #aaa9ad;
+  border: 1px rgb(157, 153, 153) solid;
+  width: 17rem;
+  height: 23rem;
+  padding: 1rem;
+  margin-top: 30px;
+  grid-gap: 12px;
+  box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.25) inset, 2px 2px 10px white inset;
+  font-family: "Orbitron", sans-serif, monospace;
+  border-top-left-radius: 95%15px;
+  border-top-right-radius: 95%15px;
+  border-bottom-left-radius: 95%15px;
+  border-bottom-right-radius: 95%15px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-area: calculatorWrapper;
+  grid-template-areas:
+    ". . . . "
+    ". . . . "
+    "display display display display"
+    ". . . . "
+    "on on divide multiply"
+    "seven eight nine minus"
+    "four five six plus"
+    "one two three equals"
+    "zero dot clear equals"
+    ". . . . ";
+}
+
+button {
+  border-radius: 5px;
+  background-color: #050505;
+  box-shadow: 1px 3px rgb(44, 43, 43);
+  border: black solid 0.5px;
+}
+label {
+  border: rgb(155, 152, 152) solid 2px;
+  border: inset, rgb(68, 67, 67);
+  white-space: nowrap;
+}
+
+label,
+button {
+  color: rgb(233, 224, 224);
+  font-size: 16px;
+}
+
+.pageLayout {
+  display: grid;
+  grid-auto-columns: 1fr auto 1fr;
+  grid-template-areas: ". calculatorWrapper .";
+}
+
+#display {
+  grid-area: display;
+  text-align: right;
+  font-size: 2rem;
+  padding: 8px 8px 2px 8px;
+  margin-bottom: 5px;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  height: 3rem;
+  background-color: rgba(54, 116, 24, 0.09);
+}
+
+#on {
+  grid-area: on;
+  background-color: #212020;
+}
+
+#divide {
+  grid-area: divide;
+  background-color: #212020;
+}
+
+#multiply {
+  grid-area: multiply;
+  background-color: #212020;
+}
+
+#plus {
+  grid-area: plus;
+  background-color: #212020;
+}
+
+#empty {
+  grid-area: empty;
+}
+
+#minus {
+  grid-area: minus;
+  background-color: #212020;
+}
+
+#nine {
+  grid-area: nine;
+}
+
+#eight {
+  grid-area: eight;
+}
+
+#seven {
+  grid-area: seven;
+}
+
+#six {
+  grid-area: six;
+}
+
+#five {
+  grid-area: five;
+}
+
+#four {
+  grid-area: four;
+}
+
+#three {
+  grid-area: three;
+}
+
+#two {
+  grid-area: two;
+}
+
+#one {
+  grid-area: one;
+}
+
+#equals {
+  grid-area: equals;
+  background-color: #212020;
+}
+
+#zero {
+  grid-area: zero;
+}
+
+#dot {
+  grid-area: dot;
+}
+
+#clear {
+  grid-area: clear;
+}
+
+.button:active {
+  box-shadow: 1px 2px rgb(20, 20, 20);
+  transform: translateY(2px);
+}
