@@ -83,7 +83,7 @@ function updateOpDisplayVal() {
     "display"
   ).innerHTML = this.getAttribute("data-key"));
 
-  //loop through operators and get the button push to show on screen. eval?
+  //loop through operators and get the button push to show on screen.
 
   if (buttonOpText == "+") {
     pendingVal = displayVal; // move the displayed val onto pendingVal
@@ -114,7 +114,7 @@ function updateOpDisplayVal() {
     var calculation = eval(evalStringArray.join(""));
     //var calculation = Math.round(calculation * 100) / 100;
 
-    displayVal = calculation.toFixed(4).substring(0, 9);
+    displayVal = calculation.toString().substring(0, 9);
     displayValElement.innerText = displayVal;
     if (displayVal.length > 8) {
       displayValElement.innerText = "ERROR"; // otherwise numbers run off screen.
